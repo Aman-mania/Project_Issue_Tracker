@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: project-issue-tracker
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    buildCommand: ""
+    startCommand: ""
+    plan: free
+
+  - type: web
+    name: frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    buildCommand: ""
+    startCommand: ""
+    plan: free
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://project-issue-tracker.onrender.com
+    ports:
+      - port: 80
+        protocol: http
+
+  - type: pserv
+    name: mongodb
+    env: docker
+    image:
+      name: mongo:latest
+    plan: free

@@ -1,116 +1,170 @@
 # Project Issue Tracker
 
-A simple project issue tracker application built with React (frontend) and Express.js (backend) using TypeScript.
+A full-stack issue tracker that allows teams to manage projects and their corresponding issues efficiently. Built using **React** and **Express.js**, both powered by **TypeScript**, and backed by **MongoDB**.
 
-## Features
+### Dashboard/Homepage: 
+![image](https://github.com/user-attachments/assets/f11cce56-fff8-40d0-a191-5c85f9b3356f)
 
-- Create and view projects
-- Create and view issues for each project
-- Filter issues by status
-- Update issue status
+---
+
+##  Features
+
+-  Create and view multiple projects
+-  Track issues within each project
+-  Update issue status (To Do, In Progress, Done)
+-  Filter issues based on status
+-  Search Issues/Projects manually
+-  Prioritize issues by level (Low, Medium, High)
+
+---
 
 ## Tech Stack
 
-- **Frontend**: React with TypeScript
-- **Backend**: Express.js with TypeScript
-- **Database**: MongoDB (using Mongoose)
+| Layer     | Tech                             |
+|-----------|----------------------------------|
+| Frontend  | React.js (TypeScript) |
+| Backend   | Express.js (TypeScript)          |
+| Database  | MongoDB with Mongoose ORM        |
+| API       | RESTful API                      |
+| Tools     | Docker, Railway, GitHub          |
+
+---
 
 ## Why MongoDB?
 
-MongoDB was chosen for this project because:
+- **Flexible Schema**: Easily adapt as the data model evolves
+- **Natural JSON Support**: Works natively with JavaScript and TypeScript
+- **Minimal Setup**: Quick development without schema migrations
+- **Scalable**: Can scale horizontally with ease for larger applications
 
-1. **Schema Flexibility**: The document-based structure allows for easy adaptation as requirements evolve.
-2. **Quick Setup**: No need for complex migrations or schema definitions.
-3. **Natural JSON Format**: Works seamlessly with JavaScript/TypeScript and REST APIs.
-4. **Scalability**: Can easily scale horizontally if needed.
+---
+
+## Screenshots / Demonstration
+
+## Project List 
+![image](https://github.com/user-attachments/assets/d6778aad-5c7b-4cf3-8dfb-61bcb4d7bd57)
+
+## Create/add Project Form: 
+![image](https://github.com/user-attachments/assets/1ed40633-399e-4942-b97b-c9c65c8426a5)
+
+## List of issues for each project:
+![image](https://github.com/user-attachments/assets/6cf0c362-80b9-4c7b-aed5-bbda9461887b)
+
+## Create/add Issue Form:
+![image](https://github.com/user-attachments/assets/74d41e2d-4a89-4f0a-bcd2-4ad705f4932a)
+
+## Status Filter:
+![image](https://github.com/user-attachments/assets/c0f06e76-372c-437a-9879-d07d66946da7)
+
+## Sort Feature (Sort by last updated):
+![image](https://github.com/user-attachments/assets/c77e6571-4d1c-4fa0-9d38-8c3c9562da73)
+
+## Sort by priority:
+![image](https://github.com/user-attachments/assets/9eb11059-f1d6-45ce-a31c-28ecc3b35ea6)
+
+## Search Feature for Issues (Input: 1):
+![image](https://github.com/user-attachments/assets/7266e71e-2dc4-4b0b-b365-77076aaab715)
+
+## Search Feature for Projects (Input: 4):
+![image](https://github.com/user-attachments/assets/99e48a83-0839-4884-8006-7b4c6596042b)
+
+## Edit Issue:
+![image](https://github.com/user-attachments/assets/a7784ea8-5fdc-43e8-9346-9c2017014671)
+
+## Edit Project name:
+![image](https://github.com/user-attachments/assets/9ed4217f-aff6-482a-9fb5-4dcf15a0d068)
+
+## Change Status of Issue:
+![image](https://github.com/user-attachments/assets/21c2b69c-cf1b-4582-a05c-a5ee7c87caad)
+
+## Paging (Viewing page 1):
+![image](https://github.com/user-attachments/assets/b0222847-df12-42a4-a3bf-ec578b3d326b)
+
+## Paging (Viewing page 2): 
+![image](https://github.com/user-attachments/assets/ed16c853-1049-4483-8805-5aabab9c6b23)
+
+---
 
 ## Prerequisites
 
-- Node.js (v14 or later)
+- Node.js v14+
 - npm or yarn
-- MongoDB (local installation or MongoDB Atlas account)
+- MongoDB (local instance or MongoDB Atlas)
+- Docker (optional, for containerization)
+
+---
 
 ## Setup Instructions
 
 ### Backend Setup
 
-1. Navigate to the backend directory:
-   ```bash
-    cd backend
-
-2. Install dependencies:
-   ```bash
-    npm install
-
-3. Create a `.env` file in the backend directory with the following content:
-   ```bash
-    PORT=5000
-    MONGODB_URI=mongodb://localhost:27017/issue-tracker
-
-Note: If you're using MongoDB Atlas, replace the URI with your connection string.
-
-4. Start the development server:
-   ```bash
-    npm run dev
-
-The server will run on http://localhost:5000
-
+```bash
+cd backend
+npm install
+```
 ### Frontend Setup
 
-1. Navigate to the frontend directory:
-   ```bash
-    cd frontend
-2. Install dependencies:
-   ```bash
-    npm install
+```bash
+cd frontend
+npm install
+```
 
-3. Start the development server:
-   ```bash
-    npm start
+# Set Up Environment Variables:
+Create an .env file for each fronend and backend directory:
 
-The application will open in your browser at http://localhost:3000
+## For Backend
+```bash
+PORT=5000
+MONGODB_URI=<your-mongodb-connection-string>/issue-tracker
+```
+## For Frontend
+```bash
+REACT_APP_API_URL=<YOUR backend Server URL>
+#In my case: http://localhost:5000
+```
+### Frontend Setup
 
-## API Endpoints
+```bash
+npm run dev
+# Server runs at http://localhost:5000
+```
 
-- `GET /projects` - Get all projects
-- `POST /projects` - Create a new project
-- `GET /projects/:projectId/issues` - Get all issues for a project (with optional status filter)
-- `POST /projects/:projectId/issues` - Create a new issue for a project
-- `PATCH /issues/:issueId` - Update an issue
+### API Endpoints
 
-## Database Structure
+Method	Endpoint	Description
+GET	/projects	Fetch all projects
+POST	/projects	Create a new project
+GET	/projects/:projectId/issues	Get issues for a project (with optional status)
+POST	/projects/:projectId/issues	Create issue in a project
+PATCH	/issues/:issueId	Update issue status
 
-### Project Schema
+### Database Structure
+1). Project Schema
 {
-    name: String,
-    createdAt: Date,
-    updatedAt: Date
+  name: String,
+  createdAt: Date,
+  updatedAt: Date
 }
 
-### Issue Schema
+2). Issue Schema
 {
-    title: String,
-    description: String (optional),
-    status: String (enum: 'To Do', 'In Progress', 'Done'),
-    priority: String (enum: 'Low', 'Medium', 'High'),
-    project: ObjectId (reference to Project),
-    createdAt: Date,
-    updatedAt: Date
+  title: String,
+  description: String,
+  status: 'To Do' | 'In Progress' | 'Done',
+  priority: 'Low' | 'Medium' | 'High',
+  project: ObjectId (ref to Project),
+  createdAt: Date,
+  updatedAt: Date
 }
 
+### Assumptions
+> No user authentication (open access)
+> Small teams with limited issues/projects
+> Used via a modern web browser
+> MongoDB is set up and running
 
-## Assumptions
+### Future Improvements
+> Add authentication (JWT/OAuth) -Can use my existing Auth_API
 
-- Users will access the application through a modern web browser
-- MongoDB is available for data storage
-- The application will be used by a small team with a limited number of projects and issues
-- No authentication is required for this version
-
-## Future Improvements
-
-- Add user authentication and authorization
-- Implement pagination for projects and issues
-- Add sorting capabilities
-- Allow editing of project names and issue details
-- Add search functionality
-- Implement unit and integration tests
+### Thank You 
+~[AMAN BISWAKARMA]
